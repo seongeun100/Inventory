@@ -24,12 +24,14 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private UIInventory uiInventory;
 
+    [SerializeField]
+    private UIPlayerInfo uIPlayerInfo;
+
+    public UIPlayerInfo UIPlayerInfo => uIPlayerInfo;
     public UIMainMenu UIMainMenu => uiMainMenu;
     public UIStatus UIStatus => uiStatus;
     public UIInventory UIInventory => uiInventory;
     private UIState currentState;
-
-    // public UIState CurrentState => currentState;
 
     void Awake()
     {

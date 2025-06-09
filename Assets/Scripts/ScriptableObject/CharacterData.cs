@@ -6,6 +6,7 @@ public class CharacterData : ScriptableObject
     public string characterName;
     public int level;
     public int exp;
+    public int MaxExp;
     public int maxHP;
     public int attack;
     public int defense;

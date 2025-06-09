@@ -7,6 +7,7 @@ public class Character
     public string Name { get; private set; }
     public int Level { get; private set; }
     public int Exp { get; private set; }
+    public int MaxExp { get; private set; }
     public int BaseAttack { get; private set; }
     public int BaseDefense { get; private set; }
     public int BaseMaxHP { get; private set; }
@@ -23,6 +24,7 @@ public class Character
         Name = data.characterName;
         Level = data.level;
         Exp = data.exp;
+        MaxExp = data.MaxExp;
         BaseAttack = data.attack;
         BaseDefense = data.defense;
         BaseMaxHP = data.maxHP;
@@ -30,29 +32,7 @@ public class Character
         Gold = data.gold;
         Inventory = new List<Item>();
     }
-
-    // public Character(
-    //     string name,
-    //     int level,
-    //     int exp,
-    //     int maxHP,
-    //     int attack,
-    //     int defense,
-    //     int critical,
-    //     int gold
-    // )
-    // {
-    //     Name = name;
-    //     Level = level;
-    //     Exp = exp;
-    //     BaseAttack = attack;
-    //     BaseDefense = defense;
-    //     BaseMaxHP = maxHP;
-    //     BaseCriticalRate = critical;
-    //     Gold = gold;
-    //     Inventory = new List<Item>();
-    // }
-
+    
     public void AddItem(Item item)
     {
         Inventory.Add(item);

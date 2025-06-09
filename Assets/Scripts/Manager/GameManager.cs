@@ -40,15 +40,15 @@ public class GameManager : MonoBehaviour
 
     public void SetData()
     {
-        // Player = new Character("Chad", 10, 9, 100, 35, 20, 15, 1234567);
         Player = new Character(characterData);
 
         AddInventoryItems();
 
-        UIManager.Instance.UIMainMenu.SetPlayerInfo(Player);
+        UIManager.Instance.UIPlayerInfo.SetPlayerInfo(Player);
+        UIManager.Instance.UIPlayerInfo.SetPlayerGold(Player.Gold);
+        UIManager.Instance.UIPlayerInfo.SetExpBar(Player.Exp, Player.MaxExp);
         UIManager.Instance.UIStatus.SetPlayerStatInfo(Player);
         UIManager.Instance.UIInventory.SetInventoryItems(Player.Inventory, Player.EquippedItems);
-        UIManager.Instance.UIMainMenu.SetPlayerGold(Player.Gold);
     }
 
     public void EquipItem(Item item)
@@ -65,6 +65,6 @@ public class GameManager : MonoBehaviour
 
     public void SetPlayerGold(int gold)
     {
-        UIManager.Instance.UIMainMenu.SetPlayerGold(Player.Gold);
+        UIManager.Instance.UIPlayerInfo.SetPlayerGold(Player.Gold);
     }
 }
