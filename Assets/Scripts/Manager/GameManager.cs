@@ -1,5 +1,3 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -43,28 +41,23 @@ public class GameManager : MonoBehaviour
         Player = new Character(characterData);
 
         AddInventoryItems();
-
-        UIManager.Instance.UIPlayerInfo.SetPlayerInfo(Player);
-        UIManager.Instance.UIPlayerInfo.SetPlayerGold(Player.Gold);
-        UIManager.Instance.UIPlayerInfo.SetExpBar(Player.Exp, Player.MaxExp);
-        UIManager.Instance.UIStatus.SetPlayerStatInfo(Player);
-        UIManager.Instance.UIInventory.SetInventoryItems(Player.Inventory, Player.EquippedItems);
+        UIManager.Instance.UpdateUI(Player);
     }
 
     public void EquipItem(Item item)
     {
         Player.Equip(item, item.Type);
-        UIManager.Instance.UIStatus.SetPlayerStatInfo(Player);
+        UIManager.Instance.SetPlayerStatInfo(Player);
     }
 
     public void UnEquipItem(ItemType type)
     {
         Player.UnEquip(type);
-        UIManager.Instance.UIStatus.SetPlayerStatInfo(Player);
+        UIManager.Instance.SetPlayerStatInfo(Player);
     }
 
     public void SetPlayerGold(int gold)
     {
-        UIManager.Instance.UIPlayerInfo.SetPlayerGold(Player.Gold);
+        UIManager.Instance.SetPlayerGold(Player.Gold);
     }
 }

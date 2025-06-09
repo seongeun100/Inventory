@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,13 +11,12 @@ public class UISlot : MonoBehaviour
 
     [SerializeField]
     private Button slotButton;
-    private UIInventory parentInventory;
 
     private Item item;
 
     void Start()
     {
-        slotButton.onClick.AddListener(OnSlotClicked);
+        slotButton.onClick.AddListener(OnClickSlot);
     }
 
     public void SetItem(Item item, bool isEquipped = false)
@@ -37,7 +35,8 @@ public class UISlot : MonoBehaviour
         }
         equippedIcon.SetActive(isEquipped);
     }
-    public void OnSlotClicked()
+
+    public void OnClickSlot()
     {
         if (item == null)
             return;
@@ -49,11 +48,9 @@ public class UISlot : MonoBehaviour
         else
             GameManager.Instance.EquipItem(item);
 
-        UIManager.Instance.UIInventory.SetInventoryItems(
+        UIManager.Instance.SetInventoryItems(
             GameManager.Instance.Player.Inventory,
             GameManager.Instance.Player.EquippedItems
         );
     }
-
-    public void RefreshUI() { }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -23,10 +21,10 @@ public class UIStatus : MonoBehaviour
 
     void Start()
     {
-        backButton.onClick.AddListener(OnBackButtonClick);
+        backButton.onClick.AddListener(OnClickBackButton);
     }
 
-    public void OnBackButtonClick()
+    public void OnClickBackButton()
     {
         UIManager.Instance.ChangeState(UIState.MainMenu);
     }

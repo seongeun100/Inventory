@@ -1,4 +1,3 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,16 +14,16 @@ public class UIMainMenu : MonoBehaviour
 
     void Start()
     {
-        statusButton.onClick.AddListener(OpenStatus);
-        inventoryButton.onClick.AddListener(OpenInventory);
+        statusButton.onClick.AddListener(OnClickStatusButton);
+        inventoryButton.onClick.AddListener(OnClickInventoryButton);
     }
 
-    public void OpenStatus()
+    public void OnClickStatusButton()
     {
         UIManager.Instance.ChangeState(UIState.Status);
     }
 
-    public void OpenInventory()
+    public void OnClickInventoryButton()
     {
         UIManager.Instance.ChangeState(UIState.Inventory);
     }

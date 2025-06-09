@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
 public class Character
 {
@@ -8,16 +6,12 @@ public class Character
     public int Level { get; private set; }
     public int Exp { get; private set; }
     public int MaxExp { get; private set; }
-    public int BaseAttack { get; private set; }
-    public int BaseDefense { get; private set; }
-    public int BaseMaxHP { get; private set; }
-    public int BaseCriticalRate { get; private set; }
     public int Gold { get; private set; }
     public List<Item> Inventory { get; private set; }
-    private Item equippedItem;
 
     private Dictionary<ItemType, Item> equippedItems = new Dictionary<ItemType, Item>();
     public Dictionary<ItemType, Item> EquippedItems => equippedItems;
+    private Dictionary<StatType, int> baseStats;
 
     public Character(CharacterData data)
     {
@@ -25,14 +19,18 @@ public class Character
         Level = data.level;
         Exp = data.exp;
         MaxExp = data.MaxExp;
-        BaseAttack = data.attack;
-        BaseDefense = data.defense;
-        BaseMaxHP = data.maxHP;
-        BaseCriticalRate = data.criticalRate;
         Gold = data.gold;
         Inventory = new List<Item>();
+
+        baseStats = new Dictionary<StatType, int>
+        {
+            { StatType.Attack, data.attack },
+            { StatType.Defense, data.defense },
+            { StatType.MaxHP, data.maxHP },
+            { StatType.CriticalRate, data.criticalRate },
+        };
     }
-    
+
     public void AddItem(Item item)
     {
         Inventory.Add(item);
@@ -40,14 +38,16 @@ public class Character
 
     public void Equip(Item item, ItemType type)
     {
-        if (Inventory.Contains(item))
-            equippedItems[type] = item;
+        if (!Inventory.Contains(item))
+            return;
+        equippedItems[type] = item;
     }
 
     public void UnEquip(ItemType type)
     {
-        if (equippedItems.ContainsKey(type))
-            equippedItems.Remove(type);
+        if (!equippedItems.ContainsKey(type))
+            return;
+        equippedItems.Remove(type);
     }
 
     public Item GetEquippedItem(ItemType type)
@@ -58,29 +58,10 @@ public class Character
 
     public int GetTotalStat(StatType statType)
     {
-        int total = 0;
-
-        switch (statType)
-        {
-            case StatType.Attack:
-                total = BaseAttack;
-                break;
-            case StatType.Defense:
-                total = BaseDefense;
-                break;
-            case StatType.MaxHP:
-                total = BaseMaxHP;
-                break;
-            case StatType.CriticalRate:
-                total = BaseCriticalRate;
-                break;
-        }
+        baseStats.TryGetValue(statType, out int total);
 
         foreach (var item in equippedItems.Values)
-        {
-            if (item != null)
-                total += item.GetBonusStat(statType);
-        }
+            total += item?.GetBonusStat(statType) ?? 0;
 
         return total;
     }

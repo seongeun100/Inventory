@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -24,7 +23,7 @@ public class UIInventory : MonoBehaviour
 
     void Start()
     {
-        backButton.onClick.AddListener(OnBackButtonClick);
+        backButton.onClick.AddListener(OnClickBackButton);
     }
 
     private void InitInventoryUI()
@@ -62,11 +61,12 @@ public class UIInventory : MonoBehaviour
     {
         if (itemCountText != null)
         {
-            itemCountText.text = $"Inventory  <color=#FFA65F>{currentCount}</color>  <color=#00000080>/ {maxCount}</color> ";
+            itemCountText.text =
+                $"Inventory  <color=#FFA65F>{currentCount}</color>  <color=#00000080>/ {maxCount}</color> ";
         }
     }
 
-    public void OnBackButtonClick()
+    public void OnClickBackButton()
     {
         UIManager.Instance.ChangeState(UIState.MainMenu);
     }
