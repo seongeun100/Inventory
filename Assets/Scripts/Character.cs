@@ -18,27 +18,40 @@ public class Character
     private Dictionary<ItemType, Item> equippedItems = new Dictionary<ItemType, Item>();
     public Dictionary<ItemType, Item> EquippedItems => equippedItems;
 
-    public Character(
-        string name,
-        int level,
-        int exp,
-        int maxHP,
-        int attack,
-        int defense,
-        int critical,
-        int gold
-    )
+    public Character(CharacterData data)
     {
-        Name = name;
-        Level = level;
-        Exp = exp;
-        BaseAttack = attack;
-        BaseDefense = defense;
-        BaseMaxHP = maxHP;
-        BaseCriticalRate = critical;
-        Gold = gold;
+        Name = data.characterName;
+        Level = data.level;
+        Exp = data.exp;
+        BaseAttack = data.attack;
+        BaseDefense = data.defense;
+        BaseMaxHP = data.maxHP;
+        BaseCriticalRate = data.criticalRate;
+        Gold = data.gold;
         Inventory = new List<Item>();
     }
+
+    // public Character(
+    //     string name,
+    //     int level,
+    //     int exp,
+    //     int maxHP,
+    //     int attack,
+    //     int defense,
+    //     int critical,
+    //     int gold
+    // )
+    // {
+    //     Name = name;
+    //     Level = level;
+    //     Exp = exp;
+    //     BaseAttack = attack;
+    //     BaseDefense = defense;
+    //     BaseMaxHP = maxHP;
+    //     BaseCriticalRate = critical;
+    //     Gold = gold;
+    //     Inventory = new List<Item>();
+    // }
 
     public void AddItem(Item item)
     {
@@ -49,7 +62,6 @@ public class Character
     {
         if (Inventory.Contains(item))
             equippedItems[type] = item;
-        Debug.Log($"장착: {item.Name} ({type})");
     }
 
     public void UnEquip(ItemType type)

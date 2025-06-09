@@ -48,7 +48,7 @@ public class UIInventory : MonoBehaviour
             {
                 var item = items[i];
                 bool isEquipped =
-                    equippedItems.TryGetValue(item.type, out var equippedItem)
+                    equippedItems.TryGetValue(item.Type, out var equippedItem)
                     && equippedItem == item;
                 slotList[i].SetItem(items[i], isEquipped);
             }

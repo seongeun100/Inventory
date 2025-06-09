@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -5,14 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    [SerializeField]
-    private Sprite swordIcon;
-
-    [SerializeField]
-    private Sprite shieldIcon;
-
-    [SerializeField]
-    private Sprite arrowIcon;
+    private ItemData[] itemDatas;
+    private CharacterData characterData;
 
     public Character Player { get; private set; }
 
@@ -24,6 +19,9 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        itemDatas = Resources.LoadAll<ItemData>("ItemData");
+        characterData = Resources.Load<CharacterData>("CharacterData/Chad");
     }
 
     private void Start()
@@ -31,29 +29,21 @@ public class GameManager : MonoBehaviour
         SetData();
     }
 
+    private void AddInventoryItems()
+    {
+        foreach (var data in itemDatas)
+        {
+            Item item = new Item(data);
+            Player.AddItem(item);
+        }
+    }
+
     public void SetData()
     {
-        Player = new Character("Chad", 10, 9, 100, 35, 20, 15, 1234567);
+        // Player = new Character("Chad", 10, 9, 100, 35, 20, 15, 1234567);
+        Player = new Character(characterData);
 
-        var swordStats = new Dictionary<StatType, int>
-        {
-            { StatType.Attack, 10 },
-            { StatType.CriticalRate, 5 },
-        };
-        var shieldStats = new Dictionary<StatType, int>
-        {
-            { StatType.Defense, 15 },
-            { StatType.MaxHP, 50 },
-        };
-        var arrowStats = new Dictionary<StatType, int> { { StatType.Attack, 7 } };
-
-        Item sword = new Item("Sword", ItemType.Weapon, swordIcon, swordStats);
-        Item shield = new Item("Shield", ItemType.Armor, shieldIcon, shieldStats);
-        Item arrow = new Item("Arrow", ItemType.Weapon, arrowIcon, arrowStats);
-
-        Player.AddItem(sword);
-        Player.AddItem(shield);
-        Player.AddItem(arrow);
+        AddInventoryItems();
 
         UIManager.Instance.UIMainMenu.SetPlayerInfo(Player);
         UIManager.Instance.UIStatus.SetPlayerStatInfo(Player);
@@ -63,7 +53,7 @@ public class GameManager : MonoBehaviour
 
     public void EquipItem(Item item)
     {
-        Player.Equip(item, item.type);
+        Player.Equip(item, item.Type);
         UIManager.Instance.UIStatus.SetPlayerStatInfo(Player);
     }
 

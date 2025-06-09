@@ -42,10 +42,10 @@ public class UISlot : MonoBehaviour
         if (item == null)
             return;
 
-        Item equippedItem = GameManager.Instance.Player.GetEquippedItem(item.type);
+        Item equippedItem = GameManager.Instance.Player.GetEquippedItem(item.Type);
 
         if (equippedItem == item)
-            GameManager.Instance.UnEquipItem(item.type);
+            GameManager.Instance.UnEquipItem(item.Type);
         else
             GameManager.Instance.EquipItem(item);
 
