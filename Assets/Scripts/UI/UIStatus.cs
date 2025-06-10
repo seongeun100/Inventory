@@ -21,7 +21,7 @@ public class UIStatus : MonoBehaviour
 
     void Start()
     {
-        backButton.onClick.AddListener(OnClickBackButton);
+        backButton.onClick.AddListener(OnClickBackButton); // 뒤로 가기 버튼 클릭 시 처리
     }
 
     public void OnClickBackButton()
@@ -29,6 +29,7 @@ public class UIStatus : MonoBehaviour
         UIManager.Instance.ChangeState(UIState.MainMenu);
     }
 
+    // 플레이어 스텟 표시
     public void SetPlayerStatInfo(Character character)
     {
         attackText.text = $"Attack\n{character.GetTotalStat(StatType.Attack)}";
