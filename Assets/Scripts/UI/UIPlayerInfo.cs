@@ -19,17 +19,20 @@ public class UIPlayerInfo : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI expText;
 
+    // 플레이어 정보 표시
     public void SetPlayerInfo(Character character)
     {
         nameText.text = $"{character.Name}";
         levelText.text = $"Lv {character.Level}";
     }
 
+    // 골드 표시
     public void SetPlayerGold(int gold)
     {
         goldText.text = gold.ToString("N0");
     }
 
+    // 경험치 바 표시
     public void SetExpBar(float current, float max)
     {
         expSlider.value = current / max;

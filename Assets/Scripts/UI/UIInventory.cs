@@ -11,21 +11,22 @@ public class UIInventory : MonoBehaviour
     [SerializeField]
     private Transform slotsParent;
 
-    private List<UISlot> slotList = new List<UISlot>();
+    private List<UISlot> slotList = new List<UISlot>(); // 슬롯 리스트
 
-    private int slotCount = 20;
-
-    [SerializeField]
-    private Button backButton;
+    private int slotCount = 20; // 인벤토리 최대 슬롯 수
 
     [SerializeField]
-    private TextMeshProUGUI itemCountText;
+    private Button backButton; // 뒤로 가기 버튼
+
+    [SerializeField]
+    private TextMeshProUGUI itemCountText; // 아이템 개수 표시 텍스트
 
     void Start()
     {
-        backButton.onClick.AddListener(OnClickBackButton);
+        backButton.onClick.AddListener(OnClickBackButton); // 뒤로 가기 버튼 클릭 시 처리
     }
 
+    // 인벤토리 슬롯 UI 초기화
     private void InitInventoryUI()
     {
         for (int i = 0; i < slotCount; i++)
@@ -36,6 +37,7 @@ public class UIInventory : MonoBehaviour
         }
     }
 
+    // 인벤토리 및 장착 아이템 설정
     public void SetInventoryItems(List<Item> items, Dictionary<ItemType, Item> equippedItems)
     {
         if (slotList.Count == 0)
@@ -57,6 +59,7 @@ public class UIInventory : MonoBehaviour
         UpdateItemCount(items.Count, slotCount);
     }
 
+    // 아이템 개수 표시
     public void UpdateItemCount(int currentCount, int maxCount)
     {
         if (itemCountText != null)
@@ -66,6 +69,7 @@ public class UIInventory : MonoBehaviour
         }
     }
 
+    // 뒤로 가기 버튼 클릭 시 메인으로
     public void OnClickBackButton()
     {
         UIManager.Instance.ChangeState(UIState.MainMenu);
