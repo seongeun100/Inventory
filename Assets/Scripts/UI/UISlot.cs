@@ -16,7 +16,7 @@ public class UISlot : MonoBehaviour
 
     void Start()
     {
-        slotButton.onClick.AddListener(OnClickSlot);
+        slotButton.onClick.AddListener(OnClickSlot); // 슬롯 클릭시 처리
     }
 
     public void SetItem(Item item, bool isEquipped = false)
@@ -36,6 +36,7 @@ public class UISlot : MonoBehaviour
         equippedIcon.SetActive(isEquipped);
     }
 
+    // 슬롯 클릭 시 장착,해제
     public void OnClickSlot()
     {
         if (item == null)
